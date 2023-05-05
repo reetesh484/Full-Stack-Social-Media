@@ -47,7 +47,7 @@ export const register = asyncHandler(async (req, res) => {
   res.cookie("token",token,cookieOptions)
 
   //send back a response to the user
-  res.status(200).json({
+  res.status(201).json({
     success:true,token,user
   })
 
