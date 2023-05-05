@@ -3,7 +3,7 @@ import asyncHandler from "../service/asyncHandler.js";
 import CustomError from "../service/customError.js";
 
 export const cookieOptions = {
-    expires:new Date(Date.now + 3*24*60*60*1000),
+    expires:new Date(Date.now() + 3*24*60*60*1000),
     httpOnly:true
 }
 
@@ -23,20 +23,23 @@ export const register = asyncHandler(async (req, res) => {
   } = req.body;
 
   //validation
-  if(!firstName || !lastName || !email || !password || !picturePath || !friends || !location || !occupation ){
+  if(!firstName || !lastName || !email || !password || !picturePath ){
     throw new CustomError("Please add all the fields",400);
   }
 
   const existingUser = await User.findOne({email})
+
+  console.log(existingUser)
 
   if(existingUser){
     throw new CustomError("User already exists",400);
   }
 
   //lets add data to the database
-  const user = User.create({
+  const user = await User.create({
     firstName,lastName,email,password,picturePath,friends,location,occupation
   })
+
 
   //generate JWT Token
   const token = user.getJWTtoken()

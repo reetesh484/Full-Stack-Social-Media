@@ -11,8 +11,11 @@ import { fileURLToPath } from 'url';
 import connectDB from './db/connect.js';
 import cookieParser from 'cookie-parser';
 import routes from './routes/index.js'
-// Configurations 
+import User from './model/User.js';
+import Post from './model/Post.js';
+import {users,posts} from './data/index.js'
 
+// Configurations 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 dotenv.config();
@@ -53,6 +56,9 @@ const start = async() => {
         app.listen(PORT,() => {
             console.log(`Server is listening on port ${PORT}`)
         })
+        //to populate dummy data
+        // User.insertMany(users);
+        // Post.insertMany(posts);
     } catch(error){
         console.log(error);
     }
