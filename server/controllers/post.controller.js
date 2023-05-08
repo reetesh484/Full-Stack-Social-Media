@@ -5,7 +5,7 @@ import CustomError from '../service/customError.js'
 
 export const createPost = asyncHandler(async(req,res) => {
     const {userId, description, picturePath} = req.body;
-
+    console.log(req.body)
     const user  = await User.findById(userId);
 
     if(!user){
