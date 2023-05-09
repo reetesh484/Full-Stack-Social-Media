@@ -17,6 +17,7 @@ const UserWidget = ({ userId, picturePath }) => {
   const { palette } = useTheme();
   const navigate = useNavigate();
   const token = useSelector((state) => state.token);
+  const savedUser = useSelector((state) => state.user);
   const dark = palette.neutral.dark;
   const medium = palette.neutral.medium;
   const main = palette.neutral.main;
@@ -49,8 +50,7 @@ const UserWidget = ({ userId, picturePath }) => {
     viewedProfile,
     impressions,
     friends,
-  } = user;
-
+  } = savedUser._id === userId ? savedUser : user;
 
   return (
     <WidgetWrapper>
@@ -97,7 +97,6 @@ const UserWidget = ({ userId, picturePath }) => {
 
       <Divider />
 
-
       {/* third row  */}
       <Box p="1rem 0">
         <FlexBetween mb="0.5rem">
@@ -115,7 +114,6 @@ const UserWidget = ({ userId, picturePath }) => {
       </Box>
 
       <Divider />
-
 
       {/* fourth row  */}
       <Box p="1rem 0">

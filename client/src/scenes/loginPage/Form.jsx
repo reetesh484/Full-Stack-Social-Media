@@ -79,7 +79,6 @@ const Form = () => {
   };
 
   const login = async (values, onSubmitProps) => {
-    console.log(values, JSON.stringify(values));
     const loggedInResponse = await fetch(
       "http://localhost:3001/api/v1/auth/login",
       {

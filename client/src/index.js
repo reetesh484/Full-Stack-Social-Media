@@ -17,6 +17,7 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { PersistGate } from "redux-persist/integration/react";
+import Loader from "components/Loader";
 
 const persistConfig = {
   key:"root",
@@ -38,7 +39,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistStore(store)} >
+      <PersistGate loading={<Loader />} persistor={persistStore(store)} onBeforeLift={() => new Promise(resolve => setTimeout(resolve, 500))} >
         <App />
       </PersistGate>
     </Provider>

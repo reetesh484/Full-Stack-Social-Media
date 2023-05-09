@@ -31,7 +31,7 @@ const HomePage = () => {
             <PostsWidget userId={_id} />
         </Box>
         {isNonMobileScreens && <Box flexBasis="26%">
-          <AdvertWidget />
+          {/* <AdvertWidget /> */}
           <Box m="2rem 0" />
           <FriendListWidget userId={_id} />
         </Box> }
