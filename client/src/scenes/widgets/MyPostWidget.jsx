@@ -42,7 +42,7 @@ const MyPostWidget = ({ picturePath }) => {
     formData.append("userId", _id);
     formData.append("description", post);
     if (image) {
-      formData.append("picturePath", image.name);
+          formData.append("picturePath", image.name);
     }
 
     const response = await fetch(`${process.env.REACT_APP_BASE_URL}/post`, {
@@ -51,10 +51,10 @@ const MyPostWidget = ({ picturePath }) => {
       body: formData,
     });
 
-    const posts = await response.json();
-    console.log(posts);
+    const {posts} = await response.json();
     dispatch(setPosts({ posts }));
     setImage(null);
+    setIsImage(false);
     setPost("");
   };
 

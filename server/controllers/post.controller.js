@@ -84,6 +84,6 @@ export const likePost = asyncHandler(async(req,res) => {
 
     res.status(200).json({
         success:true,
-        updatedPost
+        post:updatedPost
     })
 })

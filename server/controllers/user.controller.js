@@ -40,16 +40,16 @@ export const getUserFriends = asyncHandler(async (req, res) => {
 
   res.status(200).json({
     success: true,
-    formattedFriends,
+    friends:formattedFriends,
   });
 });
 
 //update
 export const addRemoveFriend = asyncHandler(async (req, res) => {
   const { id, friendId } = req.params;
-  const user = User.findById(id);
+  const user = await User.findById(id);
 
-  if (!user) {
+  if (!user) { 
     throw new CustomError("User not found", 404);
   }
   const friend = await User.findById(friendId);
@@ -71,7 +71,7 @@ export const addRemoveFriend = asyncHandler(async (req, res) => {
 
 
   const friends = await Promise.all(
-    user.friends.map((id) => User.findById(id))
+    user.friends.map((id) =>  User.findById(id))
   );
 
   if (!friends) {
@@ -86,6 +86,24 @@ export const addRemoveFriend = asyncHandler(async (req, res) => {
 
   res.status(200).json({
     success: true,
-    formattedFriends,
+    friends:formattedFriends,
   });
 });
+
+
+export const updateViews = asyncHandler(async(req,res) => {
+  const { id } = req.params;
+  const user = await User.findById(id);
+
+  if (!user) { 
+    throw new CustomError("User not found", 404);
+  }
+
+  user.viewedProfile += 1;
+  await user.save();
+
+  res.status(200).json({
+    success:true,
+    user
+  })
+})

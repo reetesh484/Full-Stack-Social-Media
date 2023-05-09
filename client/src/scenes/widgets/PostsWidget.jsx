@@ -19,7 +19,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
 
   const getUserPosts = async () => {
     const response = await fetch(
-      `${process.env.REACT_APP_BASE_URL}/${userId}/posts`,
+      `${process.env.REACT_APP_BASE_URL}/post/${userId}/posts`,
       {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },
@@ -39,7 +39,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
   }, []);
   return (
     <>
-      {posts.map(
+      {posts.length>0 && posts?.map(
         ({
           _id,
           userId,
@@ -63,6 +63,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
             userPicturePath={userPicturePath}
             likes={likes}
             comments={comments}
+            isProfile={isProfile}
           />
         )
       )}
