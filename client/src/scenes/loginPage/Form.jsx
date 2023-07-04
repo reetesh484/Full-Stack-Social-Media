@@ -64,7 +64,7 @@ const Form = () => {
     formData.append("picturePath", values.picture.name);
 
     const savedUserResponse = await fetch(
-      "http://localhost:3001/api/v1/auth/register",
+      "https://full-stack-social-media.onrender.com/api/v1/auth/register",
       {
         method: "POST",
         body: formData,
@@ -80,7 +80,7 @@ const Form = () => {
 
   const login = async (values, onSubmitProps) => {
     const loggedInResponse = await fetch(
-      "http://localhost:3001/api/v1/auth/login",
+      "https://full-stack-social-media.onrender.com/api/v1/auth/login",
       {
         method: "POST",
         headers: {
